@@ -1,0 +1,26 @@
+# Check Sạc (v7)
+
+App Android siêu nhẹ đo công suất sạc thực tế (W), hiện trên thanh trạng thái khi cắm sạc và màn hình bật.
+
+## Build bằng GitHub Actions
+1. Giải nén zip, đẩy TOÀN BỘ nội dung (kể cả thư mục ẩn `.github`) lên repo GitHub (nhánh `main`).
+2. Vào tab **Actions** -> workflow **Build APK** (tự chạy khi push, hoặc bấm *Run workflow*).
+3. Chạy xong, kéo xuống mục **Artifacts** -> tải `CheckSac-v7-apk` -> giải nén lấy file `app-debug.apk`.
+4. Cài lên máy, mở app, bấm nút BẬT, cấp quyền thông báo.
+
+## Cách hoạt động (v7)
+- Công suất = |dòng sạc (CURRENT_NOW)| x điện áp pin.
+- Chỉ hiển thị qua **lớp phủ nổi** và **Widget**. Không còn icon/thông báo trên thanh trạng thái.
+- Cắm sạc: hệ thống đánh thức app (JobScheduler), app đo mỗi 2 giây khi màn hình bật.
+- Rút sạc: app tự tắt hoàn toàn (gỡ lớp phủ, dừng dịch vụ), không chạy ngầm.
+- Mở app khi chưa cắm sạc + bật lớp phủ: hiện xem thử để chỉnh vị trí, thoát app là tắt.
+
+## Neu khong thay thu muc `.github` (bi an tren dien thoai / trinh quan ly file)
+Tren GitHub (web): **Add file -> Create new file**, o ten file go dung:
+`.github/workflows/build.yml`
+roi dan noi dung file `WORKFLOW_COPY_vao_.github_workflows/build.yml` vao, bam Commit.
+
+## Cach don gian nhat khi chi co dien thoai (khong upload duoc thu muc)
+1. Sua file `.github/workflows/build.yml` tren GitHub bang noi dung file `WORKFLOW_COPY_vao_.github_workflows/build.yml`.
+2. Upload NGUYEN file `CheckSac_v7.zip` (khong giai nen) len goc repo.
+3. Workflow tu giai nen ban zip co so v lon nhat va build. Ban sau chi can upload `CheckSac_v8.zip`...
